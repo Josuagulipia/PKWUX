@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jelajah Kearifan Lokal</title>
+<style>
+:root{--bg:#fbf3e2;--card:#fffaf0;--tx:#3a2a1c;--br:#7a4b24;--gr:#2f6b3f;--rd:#9b2d2d;--gd:#c9962b;--ln:#e2d0ac;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1812;--card:#2a2219;--tx:#f1e6d0;--br:#d9a266;--gr:#7fc08f;--rd:#e08a8a;--gd:#e6b84e;--ln:#4a3d2c}}
+:root[data-theme="dark"]{--bg:#1d1812;--card:#2a2219;--tx:#f1e6d0;--br:#d9a266;--gr:#7fc08f;--rd:#e08a8a;--gd:#e6b84e;--ln:#4a3d2c}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:var(--fs,17px)/1.65 Georgia,serif}
+header{position:sticky;top:0;z-index:5;background:var(--br);color:#fff;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 12px}
+header b{margin-right:auto}
+button,select{font:inherit;font-size:15px;min-height:42px;padding:6px 12px;border-radius:10px;border:2px solid var(--br);background:var(--card);color:var(--tx);cursor:pointer}
+button.p{background:var(--rd);color:#fff;border-color:var(--rd)}
+header button{border-color:#fff3}
+main{max-width:880px;margin:auto;padding:14px}
+.card{background:var(--card);border:2px solid var(--ln);border-radius:14px;padding:14px;margin:12px 0;border-top:6px double var(--rd)}
+h1,h2,h3{color:var(--br);line-height:1.25}
+.hero{text-align:center;padding:24px 8px}.hero h1{font-size:2.1em;letter-spacing:2px;margin:0}
+.bar{height:14px;background:var(--ln);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--gr);transition:width .4s}
+textarea,input{width:100%;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--ln);background:var(--bg);color:var(--tx)}
+textarea{min-height:200px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tw{overflow-x:auto}table{border-collapse:collapse}td,th{border:1px solid var(--ln);padding:6px 8px;vertical-align:top}
+.opt{display:block;width:100%;text-align:left;margin:6px 0}.ok{background:#2f6b3f;color:#fff}.no{background:#9b2d2d;color:#fff}
+.sec.read{border-left:6px solid var(--gr)}mark{background:var(--gd);color:#000}
+.ph{border:2px dashed var(--ln);padding:14px;text-align:center;border-radius:10px;font-size:.9em}
+.hide{display:none}.badge{display:inline-block;background:var(--gd);color:#000;border-radius:20px;padding:2px 10px;margin:2px;font-size:.85em}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .4s}@keyframes in{from{opacity:0;transform:translateY(8px)}}}
+@media print{header,.np{display:none}}
+</style></head><body>
+<header><b>🌿 Jelajah Kearifan Lokal</b>
+<button data-go="home">Beranda</button><button data-go="materi">Materi</button><button data-go="misi">Misi</button><button data-go="studio">Studio</button><button data-go="guru">Mode Guru</button>
+<button id="th" aria-label="Ganti tema">🌓</button></header>
+<main id="m"></main>
+<script>
+const $=s=>document.querySelector(s),esc=t=>t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+let S={mat:null,xp:0,done:{},read:{},notes:'',studio:[],fs:17,theme:'',quiz:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem('jkl')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('jkl',JSON.stringify(S))}catch(e){}};
+const DEF=`KEMASAN KERAJINAN DENGAN INSPIRASI OBJEK BUDAYA LOKAL
+Materi Pembelajaran Prakarya dan Kewirausahaan / Muatan Lokal
+A. Pengertian Kemasan Kerajinan
+Kemasan kerajinan adalah wadah, pembungkus, atau pelindung produk kerajinan agar aman saat disimpan, dibawa, dipajang, atau dikirim, serta membantu pembeli mengenali produk dan ceritanya.
+Pada kerajinan berinspirasi budaya lokal, kemasan juga menjadi bagian dari cerita produk, misalnya kartu kemasan gantungan kunci motif Dayak atau ilustrasi rumah Betang pada tempat pensil. Unsur budaya harus digunakan dengan hormat dan tidak mengubah makna simbol budaya secara sembarangan.
+B. Fungsi Kemasan
+1. Melindungi produk dari debu, kotoran, air, goresan, tekanan, atau benturan.
+2. Memudahkan penyimpanan dan pengangkutan.
+3. Menambah daya tarik melalui warna, bentuk, bahan, gambar, dan tulisan yang serasi.
+4. Menunjukkan identitas atau merek (nama produk, pembuat, logo, nama kelompok usaha).
+5. Memberikan informasi yang benar, jelas, dan mudah dibaca.
+6. Menceritakan inspirasi budaya, jika memang benar digunakan sebagai inspirasi.
+C. Unsur-Unsur yang Perlu Diperhatikan dalam Membuat Kemasan
+1. Material: dipilih sesuai sifat, berat, bentuk, dan kerapuhan produk (kertas, karton, kain, plastik bening, busa, kertas remas).
+2. Bentuk dan ukuran: sesuai ukuran produk; terlalu sempit dapat merusak, terlalu besar membuat produk mudah bergerak dan boros bahan.
+3. Warna: serasi, mudah dilihat, dan tidak mengklaim makna budaya yang belum diketahui kebenarannya.
+4. Teks dan gambar: mudah dibaca, tidak terlalu kecil atau ramai, tidak menutupi produk; gunakan gambar buatan sendiri atau yang boleh digunakan.
+5. Label dan informasi: sesuai kebutuhan produk, ditambah penjelasan singkat sumber inspirasi dan nama daerah atau komunitas bila diketahui.
+6. Biaya dan kepedulian lingkungan: sesuai kemampuan biaya, cukup kuat tetapi tidak berlebihan, dan bila mungkin dapat dipakai ulang atau didaur ulang.
+D. Jenis Kemasan Berdasarkan Fungsinya
+Kemasan dibedakan menjadi primer, sekunder, dan tersier. Ketiganya saling melengkapi; tidak semua produk harus memakai ketiganya.
+Jenis Kemasan\tPengertian dan Fungsi\tContoh pada Kerajinan
+Kemasan primer\tLangsung melekat atau membungkus satu produk.\tKantong kain untuk gelang manik-manik; kotak kecil untuk aksesori.
+Kemasan sekunder\tMenampung atau mengelompokkan beberapa kemasan primer.\tKotak karton berisi beberapa gantungan kunci yang sudah dibungkus.
+Kemasan tersier\tUntuk pengangkutan atau distribusi dalam jumlah besar.\tKardus besar berisi beberapa kotak kerajinan untuk dikirim ke toko atau pameran.
+Pada kerajinan sederhana, kemasan primer dapat berupa kartu label atau selubung kertas. Produk tetap perlu identitas yang jelas, misalnya label atau kartu informasi.
+E. Identitas Produk dan Label Budaya Lokal
+Identitas produk (nama, logo, nama pembuat atau kelompok usaha, ciri visual) dibuat konsisten agar mudah dikenali. Label dapat memuat:
+• Nama produk, misalnya “Gantungan Kunci Motif Enggang”.
+• Nama pembuat atau kelompok.
+• Bahan utama, jika diperlukan.
+• Cara perawatan, misalnya “Simpan di tempat kering”.
+• Keterangan inspirasi budaya, misalnya “Desain ini terinspirasi dari bentuk rumah Betang”.
+• Kontak atau media sosial usaha, jika tersedia.
+Keterangan budaya harus singkat, benar, dan menghormati pemilik budaya. Bedakan fakta budaya dan ide desain pribadi. Jika belum tahu makna suatu motif, jangan menuliskannya sebagai fakta; tulis sebagai inspirasi desain dan cari informasi dari sumber tepercaya.
+F. Contoh Penerapan pada Produk Kerajinan
+Contoh 1, gantungan kunci motif Dayak: kartu karton kecil berlubang berisi nama produk, nama pembuat, dan keterangan inspirasi motif; hindari kemasan terlalu besar.
+Contoh 2, tempat pensil inspirasi rumah Betang: selubung kertas atau kotak karton pas ukuran, ilustrasi dan nama di depan, penjelasan inspirasi di belakang.
+Contoh 3, dompet kain motif lokal: kantong kuat dengan label nama, bahan, dan cara perawatan; kotak kecil sebagai kemasan sekunder bila dijual sebagai hadiah.
+Contoh 4, paket suvenir pameran sekolah: produk yang sudah dikemas ditempatkan dalam kotak lebih besar (sekunder, atau tersier bila untuk distribusi banyak paket), dengan tanda jumlah dan petunjuk penanganan.
+G. Langkah-Langkah Merancang Kemasan
+1. Kenali produk: ukuran, berat, bahan, bentuk, bagian yang mudah rusak.
+2. Tentukan tujuan kemasan: melindungi, dipajang, hadiah, atau dikirim.
+3. Pilih bahan yang sesuai: kekuatan, biaya, kemudahan, dampak lingkungan.
+4. Buat rancangan bentuk dan ukuran dengan ruang secukupnya.
+5. Tentukan identitas visual: nama, warna, tulisan, gambar.
+6. Susun label dengan informasi benar dan keterangan inspirasi budaya.
+7. Buat contoh kemasan lalu masukkan produk untuk menguji kecocokan.
+8. Uji kemasan: periksa produk mudah bergeser, tergores, atau sulit dikeluarkan; jangan uji benturan berlebihan pada produk rapuh.
+9. Evaluasi dan perbaiki berdasarkan pendapat teman.
+H. Kesalahan yang Perlu Dihindari
+• Memilih kemasan hanya karena bagus tanpa memikirkan perlindungan.
+• Kemasan terlalu besar atau terlalu kecil.
+• Menulis informasi tidak benar atau mengarang makna motif budaya.
+• Terlalu banyak warna, gambar, dan tulisan sehingga label sulit dibaca.
+• Biaya kemasan terlalu besar dibandingkan nilai produk.
+• Bahan berlebihan yang menambah sampah tanpa manfaat perlindungan.
+I. Ringkasan Materi
+Kemasan kerajinan berfungsi melindungi, memudahkan penyimpanan dan pengangkutan, menambah daya tarik, menunjukkan identitas, dan memberi informasi. Perancangannya memperhatikan bahan, bentuk, ukuran, warna, tulisan, gambar, label, biaya, dan lingkungan. Kemasan terbagi menjadi primer, sekunder, dan tersier, dan pada kerajinan berbasis budaya lokal dapat menjelaskan sumber inspirasi secara benar dan hormat kepada pemilik budaya.`;
+if(!S.mat)S.mat=DEF;
+const lv=()=>S.xp>=90?'Pengusaha Muda':S.xp>=60?'Calon Wirausahawan':S.xp>=30?'Perancang Kreatif':'Penjelajah Budaya';
+function apply(){document.documentElement.style.setProperty('--fs',S.fs+'px');if(S.theme)document.documentElement.dataset.theme=S.theme}
+$('#th').onclick=()=>{S.theme=document.documentElement.dataset.theme==='dark'||(!S.theme&&matchMedia('(prefers-color-scheme:dark)').matches)?'light':'dark';apply();save()};
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+function go(p){location.hash=p;view(p)}
+// parsing
+function parse(t){const a=t.indexOf('=== MULAI'),b=t.indexOf('=== AKHIR');let x=a>=0?t.slice(t.indexOf('\n',a)+1):t;if(b>=0)x=x.slice(0,x.indexOf('=== AKHIR'));
+x=x.replace(/^\s*\[\s*/,'').replace(/\]\s*$/,'');const L=x.split('\n').map(l=>l.trim()).filter(Boolean),secs=[];let cur={t:'Pengantar',l:[]};
+if(L.length){secs.push(cur);cur.t=L.shift()}
+L.forEach(l=>{if(/^[A-Z]\.\s/.test(l)){cur={t:l,l:[]};secs.push(cur)}else cur.l.push(l)});return secs}
+function body(l){let h='',tb=[],ul=[];const fl=()=>{if(tb.length){h+='<div class="tw"><table>'+tb.map((r,i)=>'<tr>'+r.map(c=>`<${i?'td':'th'}>${esc(c)}</${i?'td':'th'}>`).join('')+'</tr>').join('')+'</table></div>';tb=[]}if(ul.length){h+='<ul>'+ul.map(u=>'<li>'+esc(u)+'</li>').join('')+'</ul>';ul=[]}};
+l.forEach(r=>{if(r.includes('\t'))tb.push(r.split('\t'));else if(/^[•\-]\s*/.test(r)){ul.push(r.replace(/^[•\-]\s*/,''))}else{fl();h+='<p>'+esc(r)+'</p>'}});fl();return h}
+const empty='<div class="card"><h2>Materi belum dimasukkan</h2><p>Guru: buka <b>Mode Guru</b>, tempelkan materi di antara penanda <code>=== MULAI MATERI PEMBELAJARAN ===</code> dan <code>=== AKHIR MATERI PEMBELAJARAN ===</code>, lalu simpan.</p><button class="p" data-go="guru">Buka Mode Guru</button></div>';
+function view(p){p=p||'home';const m=$('#m');
+if(p==='home'){const n=parse(S.mat).length,d=n?Math.round(Object.keys(S.read).length/n*100):0;
+m.innerHTML=`<div class="hero card"><h1>JELAJAH KEARIFAN LOKAL</h1><p><b>Kenali Budaya, Ciptakan Karya, Bangun Peluang Usaha!</b></p><p>Jadilah wirausahawan muda yang mengembangkan potensi budaya lokal menjadi produk kreatif bernilai ekonomi, tanpa menghilangkan nilai budaya aslinya.</p><div class="row" style="justify-content:center"><button class="p" data-go="misi">⚔️ Mulai Petualangan</button><button data-go="materi">📖 Buka Materi</button><button data-go="misi">🏆 Lihat Tantangan</button><button data-go="home">📊 Progres Belajar</button></div></div>
+<div class="card"><b>Progres membaca: ${d}%</b><div class="bar"><i style="width:${d}%"></i></div><p>XP: <b>${S.xp}</b> · Level: <b>${lv()}</b></p><p>${Object.keys(S.done).map(k=>`<span class="badge">🏅 ${k}</span>`).join('')||'Belum ada lencana.'}</p><p style="font-size:.85em">Progres tersimpan di perangkat dan browser ini saja.</p></div>
+<div class="card"><h3>Panduan singkat</h3><p>1) Guru memasukkan materi di Mode Guru. 2) Siswa membaca di Materi dan menandai selesai. 3) Kerjakan Misi untuk XP. 4) Rancang produk di Studio.</p></div>`}
+else if(p==='materi'){const s=parse(S.mat);if(!s.length){m.innerHTML=empty;bind();return}
+m.innerHTML=`<div class="card np"><b>Daftar Isi</b><div class="row">${s.map((x,i)=>`<button onclick="document.getElementById('s${i}').scrollIntoView()">${S.read[i]?'✅ ':''}${esc(x.t.slice(0,28))}</button>`).join('')}</div><div class="row"><input id="q" placeholder="Cari kata dalam materi…"><button id="fa">A−</button><button id="fb">A+</button><button onclick="window.print()">🖨️ Cetak</button></div></div>
+${s.map((x,i)=>`<section class="card sec ${S.read[i]?'read':''}" id="s${i}"><h2>${esc(x.t)}</h2>${body(x.l)}<button class="np" onclick="mk(${i})">${S.read[i]?'✅ Sudah dibaca':'Tandai selesai dibaca'}</button></section>`).join('')}
+<div class="card np"><h3>Catatan belajar</h3><textarea id="nt" placeholder="Tulis catatanmu…">${esc(S.notes)}</textarea></div>`;
+$('#nt').oninput=e=>{S.notes=e.target.value;save()};$('#fa').onclick=()=>{S.fs=Math.max(13,S.fs-1);apply();save()};$('#fb').onclick=()=>{S.fs=Math.min(26,S.fs+2);apply();save()};
+$('#q').oninput=e=>{const k=e.target.value.trim();document.querySelectorAll('.sec').forEach((el,i)=>{const h=body(s[i].l);el.querySelector('h2').nextElementSibling;el.style.display=!k||(s[i].t+s[i].l.join(' ')).toLowerCase().includes(k.toLowerCase())?'':'none'})}}
+else if(p==='misi')misi();
+else if(p==='studio'){m.innerHTML=`<div class="card"><h2>Studio Kreatif Lokal</h2><input id="a" placeholder="Nama produk"><br><br><input id="b" placeholder="Inspirasi budaya (tulis hanya yang benar)"><br><br><input id="c" placeholder="Bahan & fungsi"><br><br><input id="d" placeholder="Rancangan kemasan & label"><br><br><textarea id="e" style="min-height:90px" placeholder="Refleksi: bagaimana kamu menjaga nilai budaya?"></textarea><div class="row"><button class="p" id="sv">Simpan rancangan</button></div></div>
+<div id="g">${S.studio.map((x,i)=>`<div class="card"><h3>${esc(x.a)}</h3><p><b>Inspirasi:</b> ${esc(x.b)}</p><p><b>Bahan/fungsi:</b> ${esc(x.c)}</p><p><b>Kemasan:</b> ${esc(x.d)}</p><p><i>${esc(x.e)}</i></p><button class="np" onclick="if(confirm('Hapus rancangan ini?')){S.studio.splice(${i},1);save();view('studio')}">Hapus</button> <button class="np" onclick="window.print()">Cetak</button></div>`).join('')}</div>`;
+$('#sv').onclick=()=>{const x={a:$('#a').value,b:$('#b').value,c:$('#c').value,d:$('#d').value,e:$('#e').value};if(!x.a.trim())return alert('Isi nama produk dahulu.');S.studio.push(x);if(!S.done['Perancang Kreatif']){S.done['Perancang Kreatif']=1;S.xp+=15}save();view('studio')}}
+else if(p==='guru'){m.innerHTML=`<div class="card"><h2>Panel Materi Guru</h2><p style="font-size:.85em">Catatan: kode akses yang ditanam di JavaScript bukan pengamanan sungguhan; untuk banyak perangkat gunakan autentikasi server.</p><textarea id="mt" placeholder="=== MULAI MATERI PEMBELAJARAN ===&#10;[ ...materi... ]&#10;=== AKHIR MATERI PEMBELAJARAN ===">${esc(S.mat)}</textarea><div class="row"><button class="p" id="s1">Simpan</button><button id="s2">Pratinjau</button><button id="s3">Kembalikan materi bawaan</button></div><div id="pv"></div></div>
+<div class="card"><h3>Kunci jawaban & bobot</h3><p>Misi 1: 10 XP per benar · Misi 2: 20 XP · Misi 3: 20 XP · Studio: 15 XP. Jawaban ada di kode soal sesuai materi di bagian A–I.</p></div>`;
+$('#s1').onclick=()=>{S.mat=$('#mt').value;save();alert('Materi tersimpan.')};
+$('#s2').onclick=()=>{const s=parse($('#mt').value);$('#pv').innerHTML=s.length?s.map(x=>`<h3>${esc(x.t)}</h3>${body(x.l)}`).join(''):'<p>Tidak ada materi.</p>'};
+$('#s3').onclick=()=>{if(confirm('Kembalikan materi ke versi bawaan? Perubahan Anda akan hilang.')){S.mat=DEF;save();view('guru')}}}
+bind()}
+function bind(){document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go))}
+window.mk=i=>{S.read[i]=1;save();view('materi');document.getElementById('s'+i)?.scrollIntoView()};
+// misi
+const MC=[
+['Fungsi manakah yang BUKAN termasuk fungsi kemasan menurut materi?',['Melindungi produk','Memberikan informasi','Menceritakan inspirasi budaya','Menentukan makna motif secara bebas','Menunjukkan identitas'],3,'Materi meminta keterangan budaya yang benar; makna motif tidak boleh dikarang.'],
+['Kemasan yang langsung membungkus satu produk disebut…',['Primer','Sekunder','Tersier','Distribusi','Label'],0,'Bagian D: kemasan primer langsung melekat atau membungkus satu produk.'],
+['Kardus besar berisi beberapa kotak kerajinan untuk dikirim ke toko termasuk kemasan…',['Primer','Sekunder','Tersier','Label','Tidak ada'],2,'Bagian D: kemasan tersier untuk pengangkutan dalam jumlah besar.']];
+const TF=[['Jika belum tahu makna suatu motif, siswa boleh menuliskan maknanya sebagai fakta.',false,'Bagian E: jangan menuliskan makna sebagai fakta; tulis sebagai inspirasi desain.'],['Kemasan yang terlalu besar membuat produk mudah bergerak dan butuh bahan lebih banyak.',true,'Bagian C poin 2.']];
+const ST=['Kenali produk','Tentukan tujuan kemasan','Pilih bahan yang sesuai','Buat rancangan bentuk dan ukuran','Tentukan identitas visual','Susun label','Buat contoh kemasan','Uji kemasan','Evaluasi dan perbaiki'];
+const PM=[['Kemasan primer','Langsung membungkus satu produk'],['Kemasan sekunder','Menampung atau mengelompokkan beberapa kemasan primer'],['Kemasan tersier','Untuk pengangkutan dalam jumlah besar']];
+function award(k,x){if(!S.quiz[k]){S.quiz[k]=1;S.xp+=x;S.done[k]=1;save()}}
+function misi(){const m=$('#m');if(!parse(S.mat).length){m.innerHTML=empty;bind();return}
+let h=`<div class="card"><h2>Misi Wirausaha Muda</h2><p>XP: <b>${S.xp}</b> · ${lv()}. XP hanya diberikan untuk jawaban benar dan penyelesaian misi (sekali per misi).</p></div><div class="card"><h3>Misi 1 — Jelajah Pengetahuan</h3>`;
+MC.forEach((q,i)=>{h+=`<p><b>${i+1}. ${q[0]}</b></p>`+q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${'ABCDE'[j]}. ${o}</button>`).join('')+`<p id="f${i}"></p>`});
+TF.forEach((q,i)=>{h+=`<p><b>Benar/Salah:</b> ${q[0]}</p><button class="opt" data-t="${i}" data-v="1">Benar</button><button class="opt" data-t="${i}" data-v="0">Salah</button><p id="t${i}"></p>`});
+h+=`</div><div class="card"><h3>Misi 2 — Pasangkan Konsep</h3><p>Pilih pengertian untuk tiap istilah.</p>${PM.map((p,i)=>`<p><b>${p[0]}</b><br><select data-p="${i}"><option value="">— pilih —</option>${PM.map((x,j)=>`<option value="${j}">${x[1]}</option>`).join('')}</select></p>`).join('')}<button id="pc">Periksa</button> <span id="pr"></span></div>
+<div class="card"><h3>Misi 3 — Susun Langkah</h3><p>Klik langkah merancang kemasan sesuai urutan (Bagian G).</p><div class="row" id="sp">${[...ST].sort(()=>Math.random()-.5).map(s=>`<button data-s="${s}">${s}</button>`).join('')}</div><p id="so">Urutan kamu: </p><button id="sr">Ulangi</button></div>`;
+m.innerHTML=h;
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const i=+b.dataset.q,q=MC[i],ok=+b.dataset.o===q[2];b.classList.add(ok?'ok':'no');$('#f'+i).textContent=(ok?'Benar! ':'Belum tepat. ')+q[3];if(ok)award('M1-'+i,10)});
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const i=+b.dataset.t,ok=(b.dataset.v==='1')===TF[i][1];b.classList.add(ok?'ok':'no');$('#t'+i).textContent=(ok?'Benar! ':'Belum tepat. ')+TF[i][2];if(ok)award('BS-'+i,10)});
+$('#pc').onclick=()=>{const v=[...document.querySelectorAll('[data-p]')].map(s=>s.value);const ok=v.every((x,i)=>+x===i&&x!=='');$('#pr').textContent=ok?'Semua benar! +20 XP':'Masih ada yang keliru. Petunjuk: lihat tabel di Bagian D.';if(ok){award('Pasangan Konsep',20);misi()}};
+let seq=[];document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{seq.push(b.dataset.s);b.disabled=true;$('#so').textContent='Urutan kamu: '+seq.join(' → ');if(seq.length===ST.length){const ok=seq.every((x,i)=>x===ST[i]);$('#so').textContent+=ok?' ✅ Tepat! +20 XP':' ❌ Belum tepat, coba lagi.';if(ok){award('Penyusun Langkah',20);setTimeout(misi,1200)}}});
+$('#sr').onclick=misi;bind()}
+apply();view(location.hash.slice(1)||'home');
+</script></body></html>
